@@ -1,0 +1,26 @@
+[
+  {
+    "id": 0,
+    "name": "1",
+    "coordinates": {
+      "x": 1.0,
+      "y": 1
+    },
+    "creationDate": "2025-04-09",
+    "studentsCount": 1,
+    "shouldBeExpelled": 1,
+    "transferredStudents": 1
+  },
+  {
+    "id": 1,
+    "name": "1",
+    "coordinates": {
+      "x": 2.0,
+      "y": 3
+    },
+    "creationDate": "2025-04-09",
+    "studentsCount": 1,
+    "shouldBeExpelled": 1,
+    "transferredStudents": 1
+  }
+]
