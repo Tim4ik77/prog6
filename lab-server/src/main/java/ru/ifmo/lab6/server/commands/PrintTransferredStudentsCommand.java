@@ -4,8 +4,6 @@ import ru.ifmo.lab6.common.collectionObject.StudyGroup;
 import ru.ifmo.lab6.common.network.Response;
 import ru.ifmo.lab6.server.program.Server;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
@@ -20,16 +18,17 @@ public class PrintTransferredStudentsCommand implements Command {
      * for all StudyGroup objects in descending order.
      *
      * @param params the command parameters, which should be empty for this command.
+     * @param login
      */
     @Override
-    public Response execute(String[] params, StudyGroup group) {
+    public Response execute(String[] params, StudyGroup group, String login) {
         if (params.length != 0) {
             return new Response("Invalid number of parameters!");
         }
 
         String result = "Количество переведенных студентов по убыванию:\n" +
                 Server.getCollectionManager().getGroups().stream()
-                        .map(StudyGroup::getTransferredStudents)
+                        .map(studyGroupWithOwner -> studyGroupWithOwner.getStudyGroup().getTransferredStudents())
                         .sorted(Comparator.reverseOrder())
                         .map(String::valueOf)
                         .collect(Collectors.joining("\n"));

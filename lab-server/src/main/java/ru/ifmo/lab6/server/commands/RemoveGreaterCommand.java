@@ -3,6 +3,7 @@ package ru.ifmo.lab6.server.commands;
 import ru.ifmo.lab6.common.collectionObject.StudyGroup;
 import ru.ifmo.lab6.common.network.Response;
 import ru.ifmo.lab6.server.managers.CollectionManager;
+import ru.ifmo.lab6.server.managers.StudyGroupWithOwner;
 import ru.ifmo.lab6.server.program.Server;
 
 import java.util.ArrayList;
@@ -18,17 +19,18 @@ public class RemoveGreaterCommand implements Command {
      * that are greater than a specified StudyGroup.
      *
      * @param params the command parameters, which should be empty for this command.
+     * @param login
      */
     @Override
-    public Response execute(String[] params, StudyGroup compareGroup) {
+    public Response execute(String[] params, StudyGroup compareGroup, String login) {
         if (params.length != 0) {
             return new Response("Invalid number of parameters!");
         }
 
         CollectionManager cm = Server.getCollectionManager();
-        ArrayList<StudyGroup> groups = cm.getGroups();
+        ArrayList<StudyGroupWithOwner> groups = cm.getGroups();
 
-        groups.removeIf(group -> group.compareTo(compareGroup) > 0);
+        //groups.removeIf(group -> group.compareTo(compareGroup) > 0);
 
         return new Response("Группы, которые удовлетворяют условию, были удалены!");
 

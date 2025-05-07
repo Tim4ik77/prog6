@@ -37,6 +37,7 @@ public class UPDClient {
 
             return (Response) SerializationUtils.deserialize(responsePacket.getData());
         } catch (IOException|ClassNotFoundException e) {
+            System.out.println(e.getMessage());
             throw new InvalidResponseException("При выполнении запроса произошла ошибка!");
         }
     }

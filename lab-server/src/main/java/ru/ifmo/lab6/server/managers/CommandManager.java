@@ -4,7 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.ifmo.lab6.common.network.Request;
 import ru.ifmo.lab6.common.network.Response;
+import ru.ifmo.lab6.common.network.User;
 import ru.ifmo.lab6.server.commands.*;
+import ru.ifmo.lab6.server.database.UserDataBaseService;
+import ru.ifmo.lab6.server.program.Server;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,9 +55,29 @@ public class CommandManager {
         String commandName = request.command();
         Response resp;
 
+        if (request.user() == null) {
+            return new Response("Не авторизованный пользователь", false);
+        }
+
+        UserDataBaseService usDb = Server.getUserDataBaseService();
+        User user = request.user();
+
+        if (commandName.equals("register")) {
+            try {
+                usDb.registerNewUser(user.name(), user.password());
+                return new Response("Успешно зарегестрирован", true);
+            } catch (Exception e) {
+                return new Response("Не удалось зарегестрировать пользователя", false);
+            }
+        }
+
+        if (!usDb.validateCredentials(user.name(), user.password())) {
+            return new Response("Не верные данные для входа!", false);
+        }
+
         if (commands.containsKey(commandName)) {
             Command command = commands.get(commandName);
-            resp = command.execute(request.args(), request.obj());
+            resp = command.execute(request.args(), request.obj(), user.name());
             logger.info("Команда '{}' успешно выполнена.", commandName);
         } else {
             resp = new Response("Введено неправильное имя команды!");

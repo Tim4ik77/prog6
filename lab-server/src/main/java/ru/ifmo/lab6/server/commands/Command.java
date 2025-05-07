@@ -12,9 +12,10 @@ public interface Command {
      * Executes the command with the given parameters.
      *
      * @param params the parameters for the command.
+     * @param login
      */
 
-    Response execute(String[] params, StudyGroup group);
+    Response execute(String[] params, StudyGroup group, String login);
 
     /**
      * Returns a description of the command.

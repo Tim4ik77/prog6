@@ -16,9 +16,10 @@ public class HelpCommand implements Command {
      * Executes the help command by printing descriptions of all available commands.
      *
      * @param params the command parameters, which should be empty for this command.
+     * @param login
      */
     @Override
-    public Response execute(String[] params, StudyGroup group) {
+    public Response execute(String[] params, StudyGroup group, String login) {
         if (params.length != 0) {
             return new Response("Invalid number of parameters!");
         }

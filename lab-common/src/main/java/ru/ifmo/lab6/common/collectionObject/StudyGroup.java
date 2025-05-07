@@ -84,6 +84,14 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
         return transferredStudents;
     }
 
+    public FormOfEducation getFormOfEducation() {
+        return formOfEducation;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
 
     /**
      * Returns a string representation of the {@code StudyGroup} object.
@@ -114,5 +122,17 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
     @Override
     public int compareTo(StudyGroup group) {
         return (int) (getStudentsCount() - group.getStudentsCount());
+    }
+
+    public Person getGroupAdmin() {
+        return groupAdmin;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public int getShouldBeExpelled() {
+        return shouldBeExpelled;
     }
 }

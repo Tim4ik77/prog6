@@ -1,4 +1,3 @@
 history
 history
 show
-execute_script test2

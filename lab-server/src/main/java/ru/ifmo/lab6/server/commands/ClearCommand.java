@@ -13,9 +13,10 @@ public class ClearCommand implements Command {
      * Executes the clear command.
      *
      * @param params command parameters. Expects no parameters.
+     * @param login
      */
     @Override
-    public Response execute(String[] params, StudyGroup group) {
+    public Response execute(String[] params, StudyGroup group, String login) {
         if (params.length != 0) {
             return new Response("Invalid number of parameters!");
         }

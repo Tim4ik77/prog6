@@ -53,4 +53,20 @@ public class Person implements Serializable {
                 ", nationality=" + nationality +
                 '}';
     }
+
+    public int getWeight() {
+        return weight;
+    }
+    public Color getEyeColor() {
+        return eyeColor;
+    }
+    public Color getHairColor() {
+        return hairColor;
+    }
+    public Country getNationality() {
+        return nationality;
+    }
+
+    public void setId(Integer personId) {
+    }
 }

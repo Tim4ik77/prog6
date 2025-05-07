@@ -34,4 +34,12 @@ public class Coordinates implements Serializable {
                 ", y=" + y +
                 '}';
     }
+
+    public float getX() {
+        return x;
+    }
+
+    public Long getY() {
+        return y;
+    }
 }

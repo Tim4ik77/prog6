@@ -2,6 +2,7 @@ package ru.ifmo.lab6.server.commands;
 
 import ru.ifmo.lab6.common.collectionObject.StudyGroup;
 import ru.ifmo.lab6.common.network.Response;
+import ru.ifmo.lab6.server.managers.StudyGroupWithOwner;
 import ru.ifmo.lab6.server.program.Server;
 
 import java.util.ArrayList;
@@ -15,21 +16,22 @@ public class AverageCountCommand implements Command {
      * Executes the average count command.
      *
      * @param params command parameters. Expects no parameters.
+     * @param login
      */
     @Override
-    public Response execute(String[] params, StudyGroup group) {
+    public Response execute(String[] params, StudyGroup group, String login) {
         if (params.length != 0) {
             return new Response("Invalid number of parameters!");
         }
 
-        ArrayList<StudyGroup> studyGroups = Server.getCollectionManager().getGroups();
+        ArrayList<StudyGroupWithOwner> studyGroups = Server.getCollectionManager().getGroups();
 
         if (studyGroups.isEmpty()) {
             return new Response("No groups available!");
         }
 
         double averageCount = studyGroups.stream()
-                .mapToLong(StudyGroup::getStudentsCount)
+                .mapToLong(sg -> sg.getStudyGroup().getStudentsCount())
                 .average()
                 .orElse(0);
 
